@@ -6,10 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,8 +29,7 @@ public class NoteListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(NoteListActivity.this, NoteActivity.class)); // lancer lactivite NoteActivity
             }
         });
 
@@ -46,12 +48,34 @@ public class NoteListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class); // nous permet d'identifier l'activiter que nous voulons lancer avec en parametres ( le context cad la classe actuelle, l'activité a creer ou a lancer) // ctrl + P pour avoir les differents constructeurs.
-                //NoteInfo note = listNotes.getItemAtPosition(position);
-                //intent.putExtra(NoteActivity.NOTE_POSITION, position);
+                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+                intent.putExtra(NoteActivity.NOTE_INFO, note);
                 startActivity(intent); // demarer l'activite
             }
         });
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.test_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_share2) {
+            Toast.makeText(this, "tested good", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_delete){
+            Toast.makeText(this, "tested second", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_next2){
+            Toast.makeText(this, "tested third", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

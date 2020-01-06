@@ -4,4 +4,6 @@
     <string name="note_title">Note title</string>
     <string name="note_text">Note text</string>
     <string name="edit_note">Edit note</string>
+    <string name="send_as_email">send as email</string>
+    <string name="next">Next</string>
 </resources>
